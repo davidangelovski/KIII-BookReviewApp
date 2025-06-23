@@ -1,0 +1,41 @@
+services:
+  mongo:
+    image: mongo:latest
+    container_name: bookreview_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - bookreview_net
+
+  backend:
+    image: davidangelovski/bookreview_backend:latest
+    container_name: bookreview_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/bookreviewdb
+    depends_on:
+      - mongo
+    networks:
+      - bookreview_net
+
+  frontend:
+    image: davidangelovski/bookreview_frontend:latest
+    container_name: bookreview_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
+    networks:
+      - bookreview_net
+
+volumes:
+  mongo_data:
+
+networks:
+  bookreview_net:
+    driver: bridge

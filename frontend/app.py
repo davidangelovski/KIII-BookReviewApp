@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:5000")
+BACKEND_URL = os.getenv("BACKEND_URL")
 
 
 @app.route('/')
@@ -54,4 +54,4 @@ def add_review(book_id):
 
 
 if __name__ == '__main__':
-    app.run(port=3000)
+    app.run(host='0.0.0.0', port=3000)
