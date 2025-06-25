@@ -1,17 +1,17 @@
 services:
   mongo:
     image: mongo:latest
-    container_name: bookreview_mongo
+    container_name: bookreview-mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
     networks:
-      - bookreview_net
+      - bookreview
 
   backend:
-    image: davidangelovski/bookreview_backend:latest
-    container_name: bookreview_backend
+    image: davidangelovski/bookreview-backend:latest
+    container_name: bookreview-backend
     ports:
       - "5000:5000"
     environment:
@@ -19,11 +19,11 @@ services:
     depends_on:
       - mongo
     networks:
-      - bookreview_net
+      - bookreview
 
   frontend:
-    image: davidangelovski/bookreview_frontend:latest
-    container_name: bookreview_frontend
+    image: davidangelovski/bookreview-frontend:latest
+    container_name: bookreview-frontend
     ports:
       - "3000:3000"
     environment:
@@ -31,7 +31,7 @@ services:
     depends_on:
       - backend
     networks:
-      - bookreview_net
+      - bookreview
 
 volumes:
   mongo_data:
