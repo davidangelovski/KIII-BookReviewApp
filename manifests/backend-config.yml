@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: bookreview
+data:
+  MONGO_URI: mongodb://mongo-0.mongo.bookreview.svc.cluster.local:27017,mongo-1.mongo.bookreview.svc.cluster.local:27017,mongo-2.mongo.bookreview.svc.cluster.local:27017/bookreviewdb?replicaSet=rs0
