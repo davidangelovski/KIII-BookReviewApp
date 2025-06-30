@@ -48,7 +48,6 @@ def add_review(book_id):
         }
         requests.post(f"{BACKEND_URL}/api/book/{book_id}/review", json=data)
         return redirect(url_for('book_detail', book_id=book_id))
-    # GET request: load book info to display title on the form
     book = requests.get(f"{BACKEND_URL}/api/book/{book_id}").json()
     return render_template('add_review.html', book=book)
 
