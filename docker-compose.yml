@@ -10,7 +10,7 @@ services:
       - bookreview
 
   backend:
-    image: davidangelovski/bookreview-backend:latest
+    build: ./backend
     container_name: bookreview-backend
     ports:
       - "5000:5000"
@@ -22,10 +22,10 @@ services:
       - bookreview
 
   frontend:
-    image: davidangelovski/bookreview-frontend:latest
+    build: ./frontend
     container_name: bookreview-frontend
     ports:
-      - "3000:3000"
+      - "8080:3000"
     environment:
       - BACKEND_URL=http://backend:5000
     depends_on:
